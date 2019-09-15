@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Accent\**" />
+    <Compile Remove="Model\Processor\**" />
+    <Compile Remove="Syllable\**" />
+    <Compile Remove="Word\**" />
+    <EmbeddedResource Remove="Accent\**" />
+    <EmbeddedResource Remove="Model\Processor\**" />
+    <EmbeddedResource Remove="Syllable\**" />
+    <EmbeddedResource Remove="Word\**" />
+    <None Remove="Accent\**" />
+    <None Remove="Model\Processor\**" />
+    <None Remove="Syllable\**" />
+    <None Remove="Word\**" />
+  </ItemGroup>
+
+</Project>
