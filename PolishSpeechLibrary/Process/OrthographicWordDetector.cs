@@ -44,6 +44,7 @@ namespace PolishSpeechLibrary.Process
                 {
                     label.IsWordInitial = true;
 
+                    // prosodic word initial
                     if((nextLabel != null || nextLabel.Letter.IsPause) 
                         && (label.Letter.Value.ToLower() == "w" || label.Letter.Value.ToLower() == "z"))
                     {
