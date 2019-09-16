@@ -14,7 +14,7 @@ namespace PolishSpeechLibrary.Convert
                 var letter = alphabet.LetterByLabel(label.Letter.Value);
                 if (letter != null)
                 {
-                    normalized.Labels.Add(label);
+                    normalized.Labels.Add(new Label(letter));
                 }
             }
 

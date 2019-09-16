@@ -30,7 +30,7 @@
         public double Duration { get; set; } = 0;
         public Letter Letter { get; set; }
         public bool IsSyllableInitial { get; set; }
-        public bool IsOrthographicWordInitial { get; set; }
+        public bool IsWordInitial { get; set; }
         public bool IsProsodicWordInitial { get; set; }
         public bool IsPhraseInitial { get; set; }
         public bool IsPrimaryWordAccent { get; set; }

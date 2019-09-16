@@ -15,6 +15,42 @@ namespace PolishSpeechLibrary.Process
             }
 
 
+            Label prevLabel, nextLabel;
+
+            for (int index = 0; index < transcription.Labels.Count; index++)
+            {
+                var label = transcription.Labels[index];
+
+                if (index >0)
+                {
+                    prevLabel = transcription.Labels[index - 1];
+                }
+                else
+                {
+                    prevLabel = null;
+                }
+
+                if(index<transcription.Labels.Count - 1)
+                {
+                    nextLabel = transcription.Labels[index + 1];
+                }
+                else
+                {
+                    nextLabel = null;
+                }
+
+                // word initial
+                if((prevLabel == null || prevLabel.Letter.IsPause) && !label.Letter.IsPause)
+                {
+                    label.IsWordInitial = true;
+
+                    if((nextLabel != null || nextLabel.Letter.IsPause) 
+                        && (label.Letter.Value.ToLower() == "w" || label.Letter.Value.ToLower() == "z"))
+                    {
+                        label.IsProsodicWordInitial = true;
+                    }
+                }
+            }
         }
     }
 }

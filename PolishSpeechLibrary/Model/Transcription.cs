@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace PolishSpeechLibrary.Model
 {
@@ -26,5 +27,15 @@ namespace PolishSpeechLibrary.Model
 
         public Alphabet Alphabet { get; set; }
         public IList<Label> Labels { get; set; } = new List<Label>();
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var l in Labels)
+            {
+                sb.AppendLine($"{l.Letter.Value}\tP[{l.Letter.IsPause}]\tW[{l.IsWordInitial}]\tPW[{l.IsProsodicWordInitial}]");
+            }
+            return sb.ToString();
+        }
     }
 }
