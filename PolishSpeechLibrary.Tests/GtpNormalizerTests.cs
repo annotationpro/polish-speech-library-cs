@@ -13,8 +13,13 @@ namespace PolishSpeechLibrary.Tests
         [TestMethod]
         public void ProcessOrthographicTest()
         {
+            // input
             var orthographic = new TextImporter().Import(" a bb  c d  ");
+
+            // operation
             var normalized = new GtpNormalizer().Process(orthographic);
+
+            // checks
             Assert.AreEqual("a", normalized[0].Letter.Value);
             Assert.AreEqual(" ", normalized[1].Letter.Value);
             Assert.AreEqual("b", normalized[2].Letter.Value);
