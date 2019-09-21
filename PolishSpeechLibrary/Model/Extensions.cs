@@ -34,5 +34,33 @@ namespace PolishSpeechLibrary.Model
         {
             return letters.FirstOrDefault(l => l.Value == label);
         }
+
+        public static ListNeighbourhood<TType> GetNighbourghood<TType>(this IList<TType>list, TType item)
+        {
+            int index = list.IndexOf(item);
+
+            var neighbourhood = new ListNeighbourhood<TType>();
+
+            if (index > 0)
+            {
+                neighbourhood.Prev = list[index - 1];
+            }
+            else
+            {
+                neighbourhood.Prev = default;
+            }
+
+
+            if(index < list.Count - 1)
+            {
+                neighbourhood.Next = list[index + 1];
+            }
+            else
+            {
+                neighbourhood.Next = default;
+            }
+
+            return neighbourhood;
+        }
     }
 }

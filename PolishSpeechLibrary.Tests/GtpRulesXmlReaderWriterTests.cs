@@ -12,7 +12,7 @@ namespace PolishSpeechLibrary.Tests
         private const string xmlFilePath = "./GtpRules.xml";
 
         [TestMethod]
-        public void SaveAndLoadGtpRules()
+        public void SaveAndLoadXmlGtpRules()
         {
             var rules = new List<GtpRule>();
             rules.Add(new GtpRule("a", "b", "c", "d"));

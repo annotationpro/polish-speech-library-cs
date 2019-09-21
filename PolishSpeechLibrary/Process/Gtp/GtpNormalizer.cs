@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using PolishSpeechLibrary.Model;
+﻿using PolishSpeechLibrary.Model;
+using System.Linq;
 
 namespace PolishSpeechLibrary.Process.Gtp
 {
@@ -11,19 +9,27 @@ namespace PolishSpeechLibrary.Process.Gtp
         {
             Transcription normalized = Transcription.CreateTranscription(source.Alphabet.Name);
 
-            Label prevLabel = null;
-
             foreach (var label in source)
             {
-                // skip repeated pauses
-                if (label.Letter.IsPause && prevLabel!=null && prevLabel.Letter.IsPause)
+                var neigbours = source.GetNighbourghood(label);
+
+                // skip start, repeated and end pauses
+                if (label.Letter.IsPause &&
+                    (neigbours.Prev == null ||
+                    neigbours.Prev.Letter.IsPause ||
+                    neigbours.Next == null))
                 {
                     continue;
                 }
 
                 normalized.Add(new Label(label));
+            }
 
-                prevLabel = label;
+            // remove last pause
+            var last = normalized.LastOrDefault();
+            if (last != null && last.Letter.IsPause)
+            {
+                normalized.Remove(last);
             }
 
             return normalized;
