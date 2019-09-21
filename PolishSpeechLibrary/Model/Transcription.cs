@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace PolishSpeechLibrary.Model
 {
-    public class Transcription
+    public class Transcription : List<Label>
     {
         private Transcription(Alphabet alphabet)
         {
@@ -13,6 +14,26 @@ namespace PolishSpeechLibrary.Model
         public static Transcription CreateUnknownTranscription()
         {
             return new Transcription(new UnknownAlphabet());
+        }
+
+        public static Transcription CreateTranscription(AlphabetName name)
+        {
+            switch (name)
+            {
+                case AlphabetName.IPA:
+                    return CreateIpaTranscription();
+                case AlphabetName.Orthographic:
+                    return CreateOrthographicTranscription();
+                case AlphabetName.SAMPA:
+                    return CreateSampaTranscription();
+                default:
+                    return CreateUnknownTranscription();
+            }
+        }
+
+        private static Transcription CreateIpaTranscription()
+        {
+            return new Transcription(new IpaAlphabet());
         }
 
         public static Transcription CreateOrthographicTranscription()
@@ -26,14 +47,13 @@ namespace PolishSpeechLibrary.Model
         }
 
         public Alphabet Alphabet { get; set; }
-        public IList<Label> Labels { get; set; } = new List<Label>();
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (var l in Labels)
+            foreach (var label in this)
             {
-                sb.AppendLine($"[{l.Letter.Value}]");
+                sb.AppendLine($"[{label.Letter.Value}]");
             }
             return sb.ToString();
         }

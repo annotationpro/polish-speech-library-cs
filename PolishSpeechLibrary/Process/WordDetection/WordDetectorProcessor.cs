@@ -17,22 +17,22 @@ namespace PolishSpeechLibrary.Process.WordDetection
 
             Label prevLabel, nextLabel;
 
-            for (int index = 0; index < transcription.Labels.Count; index++)
+            for (int index = 0; index < transcription.Count; index++)
             {
-                var label = transcription.Labels[index];
+                var label = transcription[index];
 
                 if (index >0)
                 {
-                    prevLabel = transcription.Labels[index - 1];
+                    prevLabel = transcription[index - 1];
                 }
                 else
                 {
                     prevLabel = null;
                 }
 
-                if(index<transcription.Labels.Count - 1)
+                if(index<transcription.Count - 1)
                 {
-                    nextLabel = transcription.Labels[index + 1];
+                    nextLabel = transcription[index + 1];
                 }
                 else
                 {

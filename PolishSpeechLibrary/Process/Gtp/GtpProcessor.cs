@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PolishSpeechLibrary.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -15,36 +16,22 @@ namespace PolishSpeechLibrary.Process.Gtp
 
         public GtpProcessor(string gtpRulesFilePath)
         {
-            GtpRules = LoadGtpRules(gtpRulesFilePath);
+            var readerWriter = new GtpRulesJsonReaderWriter();
+            GtpRules = readerWriter.LoadGtpRules(gtpRulesFilePath);
         }
 
         public IList<GtpRule> GtpRules { get; set; } = new List<GtpRule>();
 
         public Transcription Process(Transcription source)
         {
-            var result = Transcription.CreateSampaTranscription();
-
-            // todo: gtp here
-
-            return result;
+            var normalized = new GtpNormalizer().Process(source);
+            return ConvertGraphemeToPhoneme(normalized);
         }
 
-        public static IList<GtpRule> LoadGtpRules(string filePath)
+        private Transcription ConvertGraphemeToPhoneme(Transcription normalizedGraphemes)
         {
-            var contents = File.ReadAllText(filePath);
-            return JsonConvert.DeserializeObject<IList<GtpRule>>(contents);
-        }
-
-        public static IList<GtpRule> LoadGtpRulesFromXml(string filePath)
-        {
-            var reader = new GtpRulesXmlReader();
-            return reader.LoadGtpRules(filePath);
-        }
-
-        public static void SaveGtpRules(string filePath, IList<GtpRule> gtpRules)
-        {
-            var contents = JsonConvert.SerializeObject(gtpRules, Formatting.None);
-            File.WriteAllText(filePath, contents, Encoding.UTF8);
+            // todo: create conversion
+            throw new NotImplementedException();
         }
 
         public SteffenBatogSet OSet

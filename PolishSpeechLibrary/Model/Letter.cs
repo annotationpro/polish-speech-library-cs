@@ -11,6 +11,21 @@
             Value = value;
         }
 
+        public Letter(Letter letter)
+        {
+            Copy(letter, this);
+        }
+
+        private void Copy(Letter source, Letter target)
+        {
+            target.Id = source.Id;
+            target.Value = source.Value;
+            target.ArticulationManner = source.ArticulationManner;
+            target.ArticulationPlace =source.ArticulationPlace;
+            target.IsVoice = source.IsVoice;
+            target.IsPause = source.IsPause;
+        }
+
         public Letter(char value)
         {
             Value = value.ToString();

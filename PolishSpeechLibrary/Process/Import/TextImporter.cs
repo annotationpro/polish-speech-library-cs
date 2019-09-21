@@ -7,14 +7,22 @@ namespace PolishSpeechLibrary.Process.Import
     {
         public Transcription Import(string text)
         {
-            Transcription utterance = Transcription.CreateUnknownTranscription();
+            Transcription transcription = Transcription.CreateOrthographicTranscription();
 
             foreach (var label in text)
             {
-                utterance.Labels.Add(new Label(new Letter(label)));
+                var letter = transcription.Alphabet.LetterByLabel(label.ToString());
+
+                // skip letters not found in alphabet
+                if (letter == null)
+                {
+                    continue;
+                }
+
+                transcription.Add(new Label(letter));
             }
 
-            return utterance;
+            return transcription;
         }
     }
 }

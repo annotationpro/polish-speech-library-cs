@@ -1,6 +1,5 @@
 ﻿using PolishSpeechLibrary.Model;
 using PolishSpeechLibrary.Process;
-using PolishSpeechLibrary.Process.Convert;
 using PolishSpeechLibrary.Process.Gtp;
 using PolishSpeechLibrary.Process.Import;
 using PolishSpeechLibrary.Process.WordDetection;
@@ -55,7 +54,7 @@ namespace PolishSpeechLibrary.Tester
                 }
                 else if (operation == "4")
                 {
-                    var rules = GtpProcessor.LoadGtpRulesFromXml("./GtpRules.xml");
+                    var rules = new GtpRulesXmlReaderWriter().LoadGtpRules("./GtpRules.xml");
                     
                     foreach (var rule in rules.Take(10))
                     {
@@ -68,8 +67,9 @@ namespace PolishSpeechLibrary.Tester
                 }
                 else if (operation == "5")
                 {
-                    var rules = GtpProcessor.LoadGtpRulesFromXml("./GtpRules.xml");
-                    GtpProcessor.SaveGtpRules("./GtpRules.json", rules);
+                    var readerWriter = new GtpRulesXmlReaderWriter();
+                    var rules = readerWriter.LoadGtpRules("./GtpRules.xml");
+                    readerWriter.SaveGtpRules("./GtpRules.json", rules);
                     Console.WriteLine($"Rules ({rules.Count}) saved to file 'GtpRules.json'");
                     Console.ReadLine();
                 }
@@ -80,9 +80,7 @@ namespace PolishSpeechLibrary.Tester
         private static Transcription ImportText()
         {
             string text = "Ogólnie znana teza głosi, iż użytkownika może rozpraszać zrozumiała zawartość strony, kiedy ten chce zobaczyć sam jej wygląd.";
-            var unknown = new TextImporter().Import(text);
-            var normalized = new UnknownToOrthographicConverter().Process(unknown);
-            return normalized;
+            return new TextImporter().Import(text);
         }
 
         private static void ExportSampaAlphabet()

@@ -8,6 +8,17 @@ namespace PolishSpeechLibrary.Model
         {
         }
 
+        public ArticulationPlace(ArticulationPlace articulationPlace)
+        {
+            Copy(articulationPlace, this);
+        }
+
+        private void Copy(ArticulationPlace source, ArticulationPlace target)
+        {
+            target.Id = source.Id;
+            target.Name = source.Name;
+        }
+
         public ArticulationPlace(int id, string name)
         {
             Id = id;

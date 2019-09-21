@@ -4,6 +4,6 @@ namespace PolishSpeechLibrary.Process
 {
     internal interface ITranscriptionProcessor
     {
-        Transcription Process(Transcription transcription);
+        Transcription Process(Transcription source);
     }
 }

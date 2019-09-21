@@ -8,6 +8,18 @@ namespace PolishSpeechLibrary.Model
         {
         }
 
+        public ArticulationManner(ArticulationManner articulationManner)
+        {
+            Copy(articulationManner, this);
+        }
+
+        private void Copy(ArticulationManner source, ArticulationManner target)
+        {
+            target.Id = source.Id;
+            target.Name = source.Name;
+            target.IsVowel = source.IsVowel;
+        }
+
         public ArticulationManner(int id, string name, bool isVowel)
         {
             Id = id;

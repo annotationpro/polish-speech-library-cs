@@ -1,25 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PolishSpeechLibrary.Process.Gtp;
-using PolishSpeechLibrary.Process.Import;
+using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace PolishSpeechLibrary.Tests
 {
     [TestClass]
-    public class GtpProcessorTests
+    public class GtpRulesXmlReaderWriterTests
     {
-        private string jsonFilePath = "./GtpRules.json";
-
-        [TestMethod]
-        public void ProcessTest()
-        {
-            //var orthographic = new TextImporter().Import("To jest noga.");
-            //var rules = GtpProcessor.LoadGtpRulesFromXml("./GtpRules.xml");
-            //var phonetic = new GtpProcessor(rules).Process(orthographic);
-
-            // todo
-            //Assert.AreEqual("#$pto#jest#noga#$p", phonetic);
-        }
+        private const string xmlFilePath = "./GtpRules.xml";
 
         [TestMethod]
         public void SaveAndLoadGtpRules()
@@ -28,11 +18,10 @@ namespace PolishSpeechLibrary.Tests
             rules.Add(new GtpRule("a", "b", "c", "d"));
             rules.Add(new GtpRule("e", "f", "g", "h"));
 
-            var readerWriter = new GtpRulesJsonReaderWriter();
+            var readerWriter = new GtpRulesXmlReaderWriter();
+            readerWriter.SaveGtpRules(xmlFilePath, rules);
 
-            readerWriter.SaveGtpRules(jsonFilePath, rules);
-
-            var loadedRules = readerWriter.LoadGtpRules(jsonFilePath);
+            var loadedRules = readerWriter.LoadGtpRules(xmlFilePath);
 
             // first rule
             Assert.AreEqual("a", loadedRules[0].Grapheme);

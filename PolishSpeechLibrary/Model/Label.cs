@@ -1,4 +1,6 @@
-﻿namespace PolishSpeechLibrary.Model
+﻿using System;
+
+namespace PolishSpeechLibrary.Model
 {
     public class Label
     {
@@ -9,6 +11,26 @@
         public Label(Letter letter)
         {
             this.Letter = letter;
+        }
+
+        public Label(Label label)
+        {
+            Copy(label, this);
+    }
+
+        public static void Copy(Label source, Label target)
+        {
+            target.Start = source.Start;
+            target.Duration = source.Duration;
+            target.Letter = source.Letter;
+            target.IsSyllableInitial = source.IsSyllableInitial;
+            target.IsWordInitial = source.IsWordInitial;
+            target.IsProsodicWordInitial = source.IsProsodicWordInitial;
+            target.IsPhraseInitial = source.IsPhraseInitial;
+            target.IsPrimaryWordAccent = source.IsPrimaryWordAccent;
+            target.IsSecondaryWordAccent = source.IsSecondaryWordAccent;
+            target.IsPrimaryPhraseAccent = source.IsPrimaryPhraseAccent;
+            target.IsSecondaryPhraseAccent = source.IsSecondaryPhraseAccent;
         }
 
         public Label(double start, Letter letter)
