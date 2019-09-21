@@ -1,6 +1,6 @@
 ﻿using PolishSpeechLibrary.Model;
 
-namespace PolishSpeechLibrary.Import
+namespace PolishSpeechLibrary.Process
 {
     public interface ITranscriptionImporter<TSource>
     {

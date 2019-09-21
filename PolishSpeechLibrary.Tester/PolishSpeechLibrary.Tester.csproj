@@ -9,4 +9,10 @@
     <ProjectReference Include="..\PolishSpeechLibrary\PolishSpeechLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="GtpRules.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

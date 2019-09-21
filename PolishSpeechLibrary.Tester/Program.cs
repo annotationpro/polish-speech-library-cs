@@ -1,9 +1,12 @@
-﻿using PolishSpeechLibrary.Convert;
-using PolishSpeechLibrary.Import;
-using PolishSpeechLibrary.Model;
+﻿using PolishSpeechLibrary.Model;
 using PolishSpeechLibrary.Process;
+using PolishSpeechLibrary.Process.Convert;
+using PolishSpeechLibrary.Process.Gtp;
+using PolishSpeechLibrary.Process.Import;
+using PolishSpeechLibrary.Process.WordDetection;
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace PolishSpeechLibrary.Tester
@@ -25,6 +28,8 @@ namespace PolishSpeechLibrary.Tester
                 Console.WriteLine("1. Export SAMPA alphabet");
                 Console.WriteLine("2. Import Text");
                 Console.WriteLine("3. Detect Words");
+                Console.WriteLine("4. Load Gtp Rules");
+                Console.WriteLine("5. Save Gtp Rules");
 
                 Console.WriteLine();
                 Console.Write("Choose operation and press ENTER: ");
@@ -44,11 +49,30 @@ namespace PolishSpeechLibrary.Tester
                 else if (operation == "3")
                 {
                     var orthographic = ImportText();
-                    new OrthographicWordDetector().Process(orthographic);
-                    Console.Write(orthographic);
+                    var detected = new WordDetectorProcessor().Process(orthographic);
+                    Console.Write(detected);
                     Console.ReadLine();
                 }
-
+                else if (operation == "4")
+                {
+                    var rules = GtpProcessor.LoadGtpRulesFromXml("./GtpRules.xml");
+                    
+                    foreach (var rule in rules.Take(10))
+                    {
+                        rule.WriteToConsole();
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine("...");
+                    Console.WriteLine($"File contains {rules.Count} rules.");
+                    Console.ReadLine();
+                }
+                else if (operation == "5")
+                {
+                    var rules = GtpProcessor.LoadGtpRulesFromXml("./GtpRules.xml");
+                    GtpProcessor.SaveGtpRules("./GtpRules.json", rules);
+                    Console.WriteLine($"Rules ({rules.Count}) saved to file 'GtpRules.json'");
+                    Console.ReadLine();
+                }
 
             } while (operation != "0");
         }
@@ -57,7 +81,7 @@ namespace PolishSpeechLibrary.Tester
         {
             string text = "Ogólnie znana teza głosi, iż użytkownika może rozpraszać zrozumiała zawartość strony, kiedy ten chce zobaczyć sam jej wygląd.";
             var unknown = new TextImporter().Import(text);
-            var normalized = new UnknownToOrthographicConverter().Convert(unknown);
+            var normalized = new UnknownToOrthographicConverter().Process(unknown);
             return normalized;
         }
 

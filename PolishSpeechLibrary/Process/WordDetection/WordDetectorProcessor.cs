@@ -1,13 +1,13 @@
 ﻿using PolishSpeechLibrary.Model;
 using System;
 
-namespace PolishSpeechLibrary.Process
+namespace PolishSpeechLibrary.Process.WordDetection
 {
-    public class OrthographicWordDetector : ITranscriptionProcessor
+    public class WordDetectorProcessor : ITranscriptionProcessor
     {
         // v,z - ORTHO
         // f,s - SAMPA
-        public void Process(Transcription transcription)
+        public Transcription Process(Transcription transcription)
         {
             if(transcription.Alphabet.Name != AlphabetName.Orthographic)
             {
@@ -52,6 +52,8 @@ namespace PolishSpeechLibrary.Process
                     }
                 }
             }
+
+            return transcription;
         }
     }
 }

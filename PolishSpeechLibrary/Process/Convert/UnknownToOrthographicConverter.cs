@@ -1,10 +1,10 @@
 ﻿using PolishSpeechLibrary.Model;
 
-namespace PolishSpeechLibrary.Convert
+namespace PolishSpeechLibrary.Process.Convert
 {
-    public class UnknownToOrthographicConverter : ITranscriptionConverter
+    public class UnknownToOrthographicConverter : ITranscriptionProcessor
     {
-        public Transcription Convert(Transcription source)
+        public Transcription Process(Transcription source)
         {
             var normalized = Transcription.CreateOrthographicTranscription();
             var alphabet = normalized.Alphabet;

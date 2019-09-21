@@ -33,7 +33,7 @@ namespace PolishSpeechLibrary.Model
             StringBuilder sb = new StringBuilder();
             foreach (var l in Labels)
             {
-                sb.AppendLine($"{l.Letter.Value}\tP[{l.Letter.IsPause}]\tW[{l.IsWordInitial}]\tPW[{l.IsProsodicWordInitial}]");
+                sb.AppendLine($"[{l.Letter.Value}]");
             }
             return sb.ToString();
         }
