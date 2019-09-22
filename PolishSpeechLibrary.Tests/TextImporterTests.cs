@@ -14,7 +14,7 @@ namespace PolishSpeechLibrary.Tests
             // trancription -> labels -> letter -> value
             // transcription[i] - i element
 
-            Assert.AreEqual("", );
+            //Assert.AreEqual("", );
         }
     }
 }
