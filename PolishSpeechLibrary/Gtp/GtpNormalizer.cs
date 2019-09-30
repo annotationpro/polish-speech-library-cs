@@ -1,7 +1,7 @@
 ﻿using PolishSpeechLibrary.Model;
 using System.Linq;
 
-namespace PolishSpeechLibrary.Process.Gtp
+namespace PolishSpeechLibrary.Gtp
 {
     public class GtpNormalizer : ITranscriptionProcessor
     {
@@ -11,7 +11,7 @@ namespace PolishSpeechLibrary.Process.Gtp
 
             foreach (var label in source)
             {
-                var neigbours = source.GetNighbourghood(label);
+                var neigbours = source.GetNighbours(label);
 
                 // skip start, repeated and end pauses
                 if (label.Letter.IsPause &&

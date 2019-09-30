@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace PolishSpeechLibrary.Process.Gtp
+namespace PolishSpeechLibrary.Gtp
 {
     [Serializable]
     public class GtpRule

@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PolishSpeechLibrary.Process.Import;
+using PolishSpeechLibrary.Import;
 
 namespace PolishSpeechLibrary.Tests
 {

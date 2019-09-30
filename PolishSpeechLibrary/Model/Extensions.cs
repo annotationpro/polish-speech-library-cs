@@ -35,11 +35,16 @@ namespace PolishSpeechLibrary.Model
             return letters.FirstOrDefault(l => l.Value == label);
         }
 
-        public static ListNeighbourhood<TType> GetNighbourghood<TType>(this IList<TType>list, TType item)
+        //public static LabelNeighbours GetNeighbours(this IList<Label>list, Label item)
+        //{
+        //    return (LabelNeighbours)GetNighbours(list, item);
+        //}
+
+        public static ListNeighbourhs<TType> GetNighbours<TType>(this IList<TType>list, TType item)
         {
             int index = list.IndexOf(item);
 
-            var neighbourhood = new ListNeighbourhood<TType>();
+            var neighbourhood = new ListNeighbourhs<TType>();
 
             if (index > 0)
             {

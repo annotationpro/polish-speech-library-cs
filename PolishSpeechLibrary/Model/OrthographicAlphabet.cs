@@ -89,6 +89,18 @@ namespace PolishSpeechLibrary.Model
                 new Letter(68, "Z", null, null, false, false),
                 new Letter(69, "Ź", null, null, false, false),
                 new Letter(70, "Ż", null, null, false, false),
+                new Letter(71, ".", null, null, false, false),
+                new Letter(72, "!", null, null, false, false),
+                new Letter(73, "?", null, null, false, false),
+                new Letter(74, ",", null, null, false, false),
+                new Letter(75, ";", null, null, false, false),
+                new Letter(76, ":", null, null, false, false),
+                new Letter(77, "...", null, null, false, false),
+                new Letter(78, "(", null, null, false, false),
+                new Letter(79, ")", null, null, false, false),
+                new Letter(80, "#", null, null, false, false),
+                new Letter(81, "/", null, null, false, false),
+
                 //new Letter(71, "!", null, null, false, false),
                 //new Letter(72, "@", null, null, false, false),
                 //new Letter(73, "#", null, null, false, false),
@@ -115,7 +127,7 @@ namespace PolishSpeechLibrary.Model
                 //new Letter(94, ">", null, null, false, false),
                 //new Letter(95, ",", null, null, false, false),
                 //new Letter(96, ".", null, null, false, false),
-            };
+        };
         }
     }
 }

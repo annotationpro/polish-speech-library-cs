@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace PolishSpeechLibrary.Process.Gtp
+namespace PolishSpeechLibrary.Gtp
 {
     public class GtpRulesJsonReaderWriter
     {

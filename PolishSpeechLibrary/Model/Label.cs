@@ -31,6 +31,7 @@ namespace PolishSpeechLibrary.Model
             target.IsSecondaryWordAccent = source.IsSecondaryWordAccent;
             target.IsPrimaryPhraseAccent = source.IsPrimaryPhraseAccent;
             target.IsSecondaryPhraseAccent = source.IsSecondaryPhraseAccent;
+            target.IsNotFound = source.IsNotFound;
         }
 
         public Label(double start, Letter letter)
@@ -59,6 +60,7 @@ namespace PolishSpeechLibrary.Model
         public bool IsSecondaryWordAccent { get; set; }
         public bool IsPrimaryPhraseAccent { get; set; }
         public bool IsSecondaryPhraseAccent { get; set; }
+        public bool IsNotFound { get; set; }
 
         public override string ToString()
         {

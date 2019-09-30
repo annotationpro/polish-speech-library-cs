@@ -1,12 +1,12 @@
 ﻿using PolishSpeechLibrary.Model;
-using PolishSpeechLibrary.Process;
-using PolishSpeechLibrary.Process.Gtp;
-using PolishSpeechLibrary.Process.Import;
-using PolishSpeechLibrary.Process.WordDetection;
+using PolishSpeechLibrary.Gtp;
+using PolishSpeechLibrary.Import;
+using PolishSpeechLibrary.WordDetection;
 using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Collections.Generic;
 
 namespace PolishSpeechLibrary.Tester
 {
@@ -27,8 +27,9 @@ namespace PolishSpeechLibrary.Tester
                 Console.WriteLine("1. Export SAMPA alphabet");
                 Console.WriteLine("2. Import Text");
                 Console.WriteLine("3. Detect Words");
-                Console.WriteLine("4. Load Gtp Rules");
-                Console.WriteLine("5. Save Gtp Rules");
+                Console.WriteLine("4. Load Gtp Rules XML");
+                Console.WriteLine("5. Convert Gtp Rules XML->JSON");
+                Console.WriteLine("6. GTP");
 
                 Console.WriteLine();
                 Console.Write("Choose operation and press ENTER: ");
@@ -67,11 +68,51 @@ namespace PolishSpeechLibrary.Tester
                 }
                 else if (operation == "5")
                 {
-                    var readerWriter = new GtpRulesXmlReaderWriter();
-                    var rules = readerWriter.LoadGtpRules("./GtpRules.xml");
-                    readerWriter.SaveGtpRules("./GtpRules.json", rules);
+                    var xmlWriter = new GtpRulesXmlReaderWriter();
+                    var rules = xmlWriter.LoadGtpRules("./GtpRules.xml");                    
+                    var jsonWriter = new GtpRulesJsonReaderWriter();
+                    jsonWriter.SaveGtpRules("./GtpRules.json", rules);
                     Console.WriteLine($"Rules ({rules.Count}) saved to file 'GtpRules.json'");
                     Console.ReadLine();
+                }
+                else if (operation == "6")
+                {
+                    Console.Write($"Loading rules...");
+                    var readerWriter = new GtpRulesJsonReaderWriter();
+                    var rules = readerWriter.LoadGtpRules("./GtpRules.json");
+                    Console.WriteLine($"OK");
+
+                    var texts = new List<string> {
+                        "to jest ala ładna kobyła",
+                        "była dziewczyna nosi nocnik",
+                        "legendarny słoń walczy z pniaczkiem"
+                    };
+
+                    foreach (var text in texts)
+                    {
+                        var orthographic = new TextImporter().Import(text);
+                        Console.WriteLine($"IN : {orthographic}");
+                        
+                        var phonemes = new GtpProcessor(rules).Process(orthographic);
+                        Console.Write("OUT: ");
+                        phonemes.WriteToConsole();
+                        Console.WriteLine();
+                    }
+
+                    var inputText = string.Empty;
+                    do
+                    {
+                        Console.Write("IN : ");
+                        inputText = Console.ReadLine();
+                        var orthographic = new TextImporter().Import(inputText);
+                        Console.WriteLine($"IN : {orthographic}");
+
+                        var phonemes = new GtpProcessor(rules).Process(orthographic);
+                        Console.Write("OUT: ");
+                        phonemes.WriteToConsole();
+                        Console.WriteLine();
+                    } while (inputText != "0");
+
                 }
 
             } while (operation != "0");

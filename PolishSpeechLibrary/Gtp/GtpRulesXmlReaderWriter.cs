@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 
-namespace PolishSpeechLibrary.Process.Gtp
+namespace PolishSpeechLibrary.Gtp
 {
     public class GtpRulesXmlReaderWriter
     {

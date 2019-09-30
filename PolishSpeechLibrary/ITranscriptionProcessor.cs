@@ -1,6 +1,6 @@
 ﻿using PolishSpeechLibrary.Model;
 
-namespace PolishSpeechLibrary.Process
+namespace PolishSpeechLibrary
 {
     internal interface ITranscriptionProcessor
     {

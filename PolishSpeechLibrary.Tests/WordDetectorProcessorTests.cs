@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PolishSpeechLibrary.Process.Import;
-using PolishSpeechLibrary.Process.WordDetection;
+using PolishSpeechLibrary.Import;
+using PolishSpeechLibrary.WordDetection;
 
 namespace PolishSpeechLibrary.Tests
 {

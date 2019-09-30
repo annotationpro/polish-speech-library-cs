@@ -1,7 +1,7 @@
 ﻿using PolishSpeechLibrary.Model;
 using System;
 
-namespace PolishSpeechLibrary.Process.WordDetection
+namespace PolishSpeechLibrary.WordDetection
 {
     public class WordDetectorProcessor : ITranscriptionProcessor
     {

@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PolishSpeechLibrary.Process.Gtp;
-using System;
+using PolishSpeechLibrary.Gtp;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PolishSpeechLibrary.Tests
 {

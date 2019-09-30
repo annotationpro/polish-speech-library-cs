@@ -22,7 +22,8 @@ namespace PolishSpeechLibrary.Tests
                 IsPrimaryWordAccent = true,
                 IsSecondaryWordAccent = true,
                 IsPrimaryPhraseAccent = true,
-                IsSecondaryPhraseAccent = true
+                IsSecondaryPhraseAccent = true,
+                IsNotFound = true
             };
 
 
@@ -30,9 +31,11 @@ namespace PolishSpeechLibrary.Tests
             Label.Copy(sourceLabel, label);
 
             // writable properties count
+            // change if you add new property
+            // IMPORTANT! remember to update copy method
             var properties = typeof(Label).GetProperties().Where(p => p.CanWrite).ToList();
             int writablePropertiesCount = properties.Count();
-            Assert.AreEqual(11, writablePropertiesCount);
+            Assert.AreEqual(12, writablePropertiesCount);
 
             // copy result
             Assert.AreEqual(1, label.Start);
@@ -53,6 +56,7 @@ namespace PolishSpeechLibrary.Tests
             Assert.AreEqual(true, label.IsSecondaryWordAccent);
             Assert.AreEqual(true, label.IsPrimaryPhraseAccent);
             Assert.AreEqual(true, label.IsSecondaryPhraseAccent);
+            Assert.AreEqual(true, label.IsNotFound);
         }
     }
 }

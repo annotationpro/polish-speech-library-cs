@@ -53,9 +53,38 @@ namespace PolishSpeechLibrary.Model
             StringBuilder sb = new StringBuilder();
             foreach (var label in this)
             {
-                sb.AppendLine($"[{label.Letter.Value}]");
+                if (this.IndexOf(label) > 0)
+                {
+                    sb.Append(" ");
+                }
+                sb.Append($"{label.Letter.Value}");
             }
             return sb.ToString();
+        }
+
+        public void WriteToConsole()
+        {
+            foreach (var label in this)
+            {
+                if (this.IndexOf(label) > 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(" ");
+                }
+
+                if (label.IsNotFound)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+
+                Console.Write(label.ToString());
+
+                Console.ForegroundColor = ConsoleColor.White;
+            }
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using PolishSpeechLibrary.Model;
-using PolishSpeechLibrary.Process;
 
-namespace PolishSpeechLibrary.Process.Import
+namespace PolishSpeechLibrary.Import
 {
     public class TextImporter : ITranscriptionImporter<string>
     {
