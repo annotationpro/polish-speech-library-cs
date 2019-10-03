@@ -36,12 +36,13 @@ namespace PolishSpeechLibrary.Gtp
 
         Dictionary<string, List<GtpRule>> rulesByGrapheme = new Dictionary<string, List<GtpRule>>();
 
-        public IList<GtpRule> GtpRules { get; set; } = new List<GtpRule>();
 
         public GtpExtendedOutput ExtendedOutput { get; } = new GtpExtendedOutput();
 
         public Transcription Process(Transcription source)
         {
+            ExtendedOutput.UsedRules.Clear();
+
             var phonetic = Transcription.CreateSampaTranscription();
 
             foreach (var label in source)
@@ -60,10 +61,20 @@ namespace PolishSpeechLibrary.Gtp
                     {
                         phoneticLabel.IsNotFound = true;
                     }
+                    
+                    // not found rule for debug
+                    ExtendedOutput.UsedRules.Add(new GtpRule() {
+                        Grapheme = label.Letter.Value,
+                        PrecedingContext = "-",
+                        FollowingContext = "-",
+                        Phoneme = label.Letter.Value,
+                        IsNotFound = true
+                    });
                 }
                 else
                 {
                     phoneticLabel = new Label(new Letter(rule.Phoneme));
+                    ExtendedOutput.UsedRules.Add(rule);
                 }
 
                 phonetic.Add(phoneticLabel);

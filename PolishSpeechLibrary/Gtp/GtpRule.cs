@@ -30,6 +30,8 @@ namespace PolishSpeechLibrary.Gtp
         [JsonProperty("f")]
         public string FollowingContext { get; set; } = string.Empty;
 
+        public bool IsNotFound { get; set; } = false;
+
         public override string ToString()
         {
             return $"[{PrecedingContext}][{Grapheme}][{FollowingContext}] -> {Phoneme}";
@@ -39,21 +41,21 @@ namespace PolishSpeechLibrary.Gtp
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("[");
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = IsNotFound ? ConsoleColor.Red : ConsoleColor.Gray;
             Console.Write(PrecedingContext);
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("]");
 
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("[");
-            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = IsNotFound ? ConsoleColor.Red : ConsoleColor.Blue;
             Console.Write(Grapheme);
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("]");
 
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("[");
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = IsNotFound ? ConsoleColor.Red : ConsoleColor.Gray;
             Console.Write(FollowingContext);
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("]");
@@ -62,7 +64,7 @@ namespace PolishSpeechLibrary.Gtp
 
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("[");
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = IsNotFound ? ConsoleColor.Red : ConsoleColor.Green;
             Console.Write(Phoneme);
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("]");

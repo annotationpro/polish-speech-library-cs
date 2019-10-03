@@ -77,10 +77,20 @@ namespace PolishSpeechLibrary.Tester
                 }
                 else if (operation == "6")
                 {
-                    Console.Write($"Loading rules...");
+                    Console.WriteLine("----------------------------------");
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("GTP Example");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("----------------------------------");
+
+                    Console.Write($"Loading rules... ");
                     var readerWriter = new GtpRulesJsonReaderWriter();
                     var rules = readerWriter.LoadGtpRules("./GtpRules.json");
-                    Console.WriteLine($"OK");
+                    Console.Write("[");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("OK");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("]");
 
                     var texts = new List<string> {
                         "to jest ala ładna kobyła",
@@ -99,7 +109,14 @@ namespace PolishSpeechLibrary.Tester
                         Console.WriteLine();
                     }
 
-                    var inputText = string.Empty;
+                    Console.WriteLine("----------------------------------");
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("GTP Command Line");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("----------------------------------");
+
+                    var gtp = new GtpProcessor(rules);
+                    var inputText = string.Empty;                   
                     do
                     {
                         Console.Write("IN : ");
@@ -107,15 +124,31 @@ namespace PolishSpeechLibrary.Tester
                         var orthographic = new TextImporter().Import(inputText);
                         Console.WriteLine($"IN : {orthographic}");
 
-                        var phonemes = new GtpProcessor(rules).Process(orthographic);
+                        var phonemes = gtp.Process(orthographic);
                         Console.Write("OUT: ");
                         phonemes.WriteToConsole();
                         Console.WriteLine();
+                        ShowGtpDebug(gtp.ExtendedOutput);
                     } while (inputText != "0");
 
                 }
 
             } while (operation != "0");
+        }
+
+        private static void ShowGtpDebug(GtpExtendedOutput output)
+        {
+            Console.WriteLine("----------------------------------");
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("OUTPUT - Used Rules");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("----------------------------------");
+            foreach (var rule in output.UsedRules)
+            {
+                rule.WriteToConsole();
+                Console.WriteLine();
+            }
+            Console.WriteLine("----------------------------------");
         }
 
         private static Transcription ImportText()
