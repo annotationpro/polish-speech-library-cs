@@ -77,7 +77,11 @@ namespace PolishSpeechLibrary.Gtp
                     ExtendedOutput.UsedRules.Add(rule);
                 }
 
-                phonetic.Add(phoneticLabel);
+                // doesn't add "1" rule to output
+                if (phoneticLabel.Letter.Value != "1")
+                {
+                    phonetic.Add(phoneticLabel);
+                }
             }
 
             return phonetic;
