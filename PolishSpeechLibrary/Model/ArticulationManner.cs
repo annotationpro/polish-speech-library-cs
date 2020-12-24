@@ -35,6 +35,7 @@ namespace PolishSpeechLibrary.Model
         {
             return new List<ArticulationManner>()
             {
+                new ArticulationManner(0, "undefined", false),
                 new ArticulationManner(1, "sil", false),
                 new ArticulationManner(2, "fricative", false),
                 new ArticulationManner(3, "stop", false),

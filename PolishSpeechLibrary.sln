@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolishSpeechLibrary", "Poli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolishSpeechLibrary.Tester", "PolishSpeechLibrary.Tester\PolishSpeechLibrary.Tester.csproj", "{C9C85728-A794-4C2E-AAC1-2E3648BB73D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolishSpeechLibrary.Tests", "PolishSpeechLibrary.Tests\PolishSpeechLibrary.Tests.csproj", "{EAC1D1AC-862B-4725-A287-8B1D3BA3EB24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolishSpeechLibrary.Tests", "PolishSpeechLibrary.Tests\PolishSpeechLibrary.Tests.csproj", "{EAC1D1AC-862B-4725-A287-8B1D3BA3EB24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolishSpeechLibrary.GtpClient", "PolishSpeechLibrary.GtpClient\PolishSpeechLibrary.GtpClient.csproj", "{2BC6EDBB-6642-4D1A-BD4C-AD13280B4DF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{EAC1D1AC-862B-4725-A287-8B1D3BA3EB24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAC1D1AC-862B-4725-A287-8B1D3BA3EB24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAC1D1AC-862B-4725-A287-8B1D3BA3EB24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BC6EDBB-6642-4D1A-BD4C-AD13280B4DF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BC6EDBB-6642-4D1A-BD4C-AD13280B4DF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BC6EDBB-6642-4D1A-BD4C-AD13280B4DF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BC6EDBB-6642-4D1A-BD4C-AD13280B4DF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

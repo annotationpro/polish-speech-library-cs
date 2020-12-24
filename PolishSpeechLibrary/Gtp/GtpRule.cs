@@ -10,12 +10,13 @@ namespace PolishSpeechLibrary.Gtp
         {
         }
 
-        public GtpRule(string grapheme, string preceding, string following, string phoneme)
+        public GtpRule(string grapheme, string preceding, string following, string phoneme, string debug)
         {
             Grapheme = grapheme;
             PrecedingContext = preceding;
             FollowingContext = following;
             Phoneme = phoneme;
+            Debug = debug;
         }
 
         [JsonProperty("g")]
@@ -30,11 +31,14 @@ namespace PolishSpeechLibrary.Gtp
         [JsonProperty("f")]
         public string FollowingContext { get; set; } = string.Empty;
 
+        [JsonProperty("d")]
+        public string Debug { get; set; } = string.Empty;
+
         public bool IsNotFound { get; set; } = false;
 
         public override string ToString()
         {
-            return $"[{PrecedingContext}][{Grapheme}][{FollowingContext}] -> {Phoneme}";
+            return $"[{PrecedingContext}][{Grapheme}][{FollowingContext}] -> {Phoneme} <{Debug}>";
         }
 
         public void WriteToConsole()
@@ -47,27 +51,32 @@ namespace PolishSpeechLibrary.Gtp
             Console.Write("]");
 
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("[");
-            Console.ForegroundColor = IsNotFound ? ConsoleColor.Red : ConsoleColor.Blue;
+            Console.Write("\t[");
+            Console.ForegroundColor = IsNotFound ? ConsoleColor.Red : ConsoleColor.Green;
             Console.Write(Grapheme);
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("]");
 
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("[");
+            Console.Write("\t[");
             Console.ForegroundColor = IsNotFound ? ConsoleColor.Red : ConsoleColor.Gray;
             Console.Write(FollowingContext);
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("]");
 
-            Console.Write(" -> ");
+            Console.Write("\t -> ");
 
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("[");
+            Console.Write("\t[");
             Console.ForegroundColor = IsNotFound ? ConsoleColor.Red : ConsoleColor.Green;
             Console.Write(Phoneme);
             Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("][");
+            Console.ForegroundColor = IsNotFound ? ConsoleColor.Red : ConsoleColor.Green;
+            Console.Write(Debug);
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("]");
+
         }
     }
 }

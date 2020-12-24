@@ -15,7 +15,7 @@ namespace PolishSpeechLibrary.WordDetection
             }
 
 
-            Label prevLabel, nextLabel;
+            Segment prevLabel, nextLabel;
 
             for (int index = 0; index < transcription.Count; index++)
             {

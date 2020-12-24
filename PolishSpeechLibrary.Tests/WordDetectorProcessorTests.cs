@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PolishSpeechLibrary.Import;
+using PolishSpeechLibrary.IO;
 using PolishSpeechLibrary.WordDetection;
 
 namespace PolishSpeechLibrary.Tests
@@ -8,9 +8,9 @@ namespace PolishSpeechLibrary.Tests
     public class WordDetectorProcessorTests
     {
         [TestMethod]
-        public void ProcessTest()
+        public void DetectWordsTest()
         {
-            var transcription = new TextImporter().Import("W domu. To nie. W samolocie. W ");
+            var transcription = new OrthorgraphicTranscriptionReader().Read("W domu. To nie. W samolocie. W ");
             var detected = new WordDetectorProcessor().Process(transcription);
 
             Assert.AreEqual(true, detected[0].IsProsodicWordInitial);
@@ -19,20 +19,20 @@ namespace PolishSpeechLibrary.Tests
             Assert.AreEqual(false, detected[2].IsProsodicWordInitial);
             Assert.AreEqual(true, detected[2].IsWordInitial);
 
-            Assert.AreEqual(false, detected[7].IsProsodicWordInitial);
-            Assert.AreEqual(true, detected[7].IsWordInitial);
+            Assert.AreEqual(false, detected[8].IsProsodicWordInitial);
+            Assert.AreEqual(true, detected[8].IsWordInitial);
 
-            Assert.AreEqual(false, detected[10].IsProsodicWordInitial);
-            Assert.AreEqual(true, detected[10].IsWordInitial);
+            Assert.AreEqual(false, detected[11].IsProsodicWordInitial);
+            Assert.AreEqual(true, detected[11].IsWordInitial);
 
-            Assert.AreEqual(true, detected[14].IsProsodicWordInitial);
-            Assert.AreEqual(true, detected[14].IsWordInitial);
-
-            Assert.AreEqual(false, detected[16].IsProsodicWordInitial);
+            Assert.AreEqual(true, detected[16].IsProsodicWordInitial);
             Assert.AreEqual(true, detected[16].IsWordInitial);
 
-            Assert.AreEqual(true, detected[26].IsProsodicWordInitial);
-            Assert.AreEqual(true, detected[26].IsWordInitial);
+            Assert.AreEqual(false, detected[18].IsProsodicWordInitial);
+            Assert.AreEqual(true, detected[18].IsWordInitial);
+
+            Assert.AreEqual(true, detected[29].IsProsodicWordInitial);
+            Assert.AreEqual(true, detected[29].IsWordInitial);
         }
     }
 }

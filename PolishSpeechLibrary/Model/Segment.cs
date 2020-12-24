@@ -1,24 +1,22 @@
-﻿using System;
-
-namespace PolishSpeechLibrary.Model
+﻿namespace PolishSpeechLibrary.Model
 {
-    public class Label
+    public class Segment
     {
-        public Label()
+        public Segment()
         {
         }
 
-        public Label(Letter letter)
+        public Segment(Letter letter)
         {
             this.Letter = letter;
         }
 
-        public Label(Label label)
+        public Segment(Segment segment)
         {
-            Copy(label, this);
-    }
+            Copy(segment, this);
+        }
 
-        public static void Copy(Label source, Label target)
+        public static void Copy(Segment source, Segment target)
         {
             target.Start = source.Start;
             target.Duration = source.Duration;
@@ -34,14 +32,14 @@ namespace PolishSpeechLibrary.Model
             target.IsNotFound = source.IsNotFound;
         }
 
-        public Label(double start, Letter letter)
+        public Segment(double start, Letter letter)
         {
             this.Start = start;
             this.Duration = 0;
             this.Letter = letter;
         }
 
-        public Label(double start, double duration, Letter letter)
+        public Segment(double start, double duration, Letter letter)
         {
             this.Start = start;
             this.Duration = duration;
@@ -64,7 +62,16 @@ namespace PolishSpeechLibrary.Model
 
         public override string ToString()
         {
-            return Letter.ToString();
+            string val = Letter.ToString();
+            if (IsPrimaryWordAccent) val = "\"" + val;
+            if (IsSyllableInitial) val = "." + val;
+            if (IsProsodicWordInitial || IsWordInitial) val = "#" + val;
+            return val;
         }
+
+        public string Label { get { return Letter.Value; } }
+        public bool IsVoice { get { return Letter.IsVoice; } }
+        public bool IsPause { get { return Letter.IsPause; } }
+        public bool IsVowel { get { return Letter.ArticulationManner.IsVowel; } }
     }
 }

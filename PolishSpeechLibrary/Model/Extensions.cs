@@ -35,16 +35,11 @@ namespace PolishSpeechLibrary.Model
             return letters.FirstOrDefault(l => l.Value == label);
         }
 
-        //public static LabelNeighbours GetNeighbours(this IList<Label>list, Label item)
-        //{
-        //    return (LabelNeighbours)GetNighbours(list, item);
-        //}
-
-        public static ListNeighbourhs<TType> GetNighbours<TType>(this IList<TType>list, TType item)
+        public static NeighbourhsList<TType> GetNighbours<TType>(this IList<TType> list, TType item)
         {
             int index = list.IndexOf(item);
 
-            var neighbourhood = new ListNeighbourhs<TType>();
+            var neighbourhood = new NeighbourhsList<TType>();
 
             if (index > 0)
             {
@@ -55,8 +50,7 @@ namespace PolishSpeechLibrary.Model
                 neighbourhood.Prev = default;
             }
 
-
-            if(index < list.Count - 1)
+            if (index < list.Count - 1)
             {
                 neighbourhood.Next = list[index + 1];
             }

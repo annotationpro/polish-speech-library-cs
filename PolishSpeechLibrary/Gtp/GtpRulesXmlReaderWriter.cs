@@ -90,7 +90,7 @@ namespace PolishSpeechLibrary.Gtp
             ((System.ComponentModel.ISupportInitialize)(dataTableGtpRule)).EndInit();
         }
 
-        public IList<GtpRule> LoadGtpRules(string filePath)
+        public IList<GtpRule> Read(string filePath)
         {
             var gtpRules = new List<GtpRule>();
 
@@ -112,7 +112,7 @@ namespace PolishSpeechLibrary.Gtp
             return gtpRules;
         }
 
-        public void SaveGtpRules(string filePath, IList<GtpRule> gtpRules)
+        public void Write(string filePath, IList<GtpRule> gtpRules)
         {
             dataSetGtpDatabase.Clear();
 

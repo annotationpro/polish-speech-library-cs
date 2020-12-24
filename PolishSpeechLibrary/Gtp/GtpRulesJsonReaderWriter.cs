@@ -7,13 +7,13 @@ namespace PolishSpeechLibrary.Gtp
 {
     public class GtpRulesJsonReaderWriter
     {
-        public IList<GtpRule> LoadGtpRules(string filePath)
+        public IList<GtpRule> Read(string filePath)
         {
-            var contents = File.ReadAllText(filePath);
+            var contents = File.ReadAllText(filePath, Encoding.UTF8);
             return JsonConvert.DeserializeObject<IList<GtpRule>>(contents);
         }
 
-        public void SaveGtpRules(string filePath, IList<GtpRule> gtpRules)
+        public void Write(string filePath, IList<GtpRule> gtpRules)
         {
             var contents = JsonConvert.SerializeObject(gtpRules, Formatting.None);
             File.WriteAllText(filePath, contents, Encoding.UTF8);

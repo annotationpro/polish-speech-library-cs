@@ -4,11 +4,13 @@ using System.Text;
 
 namespace PolishSpeechLibrary.Model
 {
-    public class Transcription : List<Label>
+    public class Transcription : List<Segment>
     {
+        public Alphabet Alphabet { get; private set; }
+
         private Transcription(Alphabet alphabet)
         {
-            this.Alphabet = alphabet;
+            Alphabet = alphabet;
         }
 
         public static Transcription CreateUnknownTranscription()
@@ -22,13 +24,25 @@ namespace PolishSpeechLibrary.Model
             {
                 case AlphabetName.IPA:
                     return CreateIpaTranscription();
+
                 case AlphabetName.Orthographic:
                     return CreateOrthographicTranscription();
+
                 case AlphabetName.SAMPA:
                     return CreateSampaTranscription();
+
+                case AlphabetName.ClarinSampa:
+                    return CreateClarinSampaTranscription();
+
+                case AlphabetName.Unknown:
                 default:
                     return CreateUnknownTranscription();
             }
+        }
+
+        public static Transcription CreateTranscription(Alphabet alphabet)
+        {
+            return new Transcription(alphabet);
         }
 
         private static Transcription CreateIpaTranscription()
@@ -46,7 +60,10 @@ namespace PolishSpeechLibrary.Model
             return new Transcription(new SampaAlphabet());
         }
 
-        public Alphabet Alphabet { get; set; }
+        public static Transcription CreateClarinSampaTranscription()
+        {
+            return new Transcription(new ClarinSampaAlphabet());
+        }
 
         public override string ToString()
         {

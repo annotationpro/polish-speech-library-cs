@@ -20,7 +20,7 @@ namespace PolishSpeechLibrary.Gtp
         public GtpProcessor(string gtpRulesFilePath)
         {
             var readerWriter = new GtpRulesJsonReaderWriter();
-            InitializeRules(readerWriter.LoadGtpRules(gtpRulesFilePath));
+            InitializeRules(readerWriter.Read(gtpRulesFilePath));
         }
 
         private void InitializeRules(IList<GtpRule> gtpRules)
@@ -51,11 +51,11 @@ namespace PolishSpeechLibrary.Gtp
                 var context = FindGraphemeContext(source, source.IndexOf(label));
                 var rule = FindRule(label.Letter.Value, context.Item1, context.Item2);
 
-                Label phoneticLabel = new Label(label);
+                Segment phoneticLabel = new Segment(label);
 
                 if (rule == null)
                 {
-                    phoneticLabel = new Label(new Letter(label.Letter.Value));
+                    phoneticLabel = new Segment(new Letter(label.Letter.Value));
 
                     if (!OSet.Contains(label.Letter.Value))
                     {
@@ -73,7 +73,7 @@ namespace PolishSpeechLibrary.Gtp
                 }
                 else
                 {
-                    phoneticLabel = new Label(new Letter(rule.Phoneme));
+                    phoneticLabel = new Segment(new Letter(rule.Phoneme));
                     ExtendedOutput.UsedRules.Add(rule);
                 }
 

@@ -1,10 +1,10 @@
 ﻿using PolishSpeechLibrary.Model;
 
-namespace PolishSpeechLibrary.Import
+namespace PolishSpeechLibrary.IO
 {
-    public class TextImporter : ITranscriptionImporter<string>
+    public class OrthorgraphicTranscriptionReader : ITranscriptionReader<string>
     {
-        public Transcription Import(string text)
+        public Transcription Read(string text)
         {
             Transcription transcription = Transcription.CreateOrthographicTranscription();
 
@@ -18,7 +18,7 @@ namespace PolishSpeechLibrary.Import
                     continue;
                 }
 
-                transcription.Add(new Label(letter));
+                transcription.Add(new Segment(letter));
             }
 
             return transcription;

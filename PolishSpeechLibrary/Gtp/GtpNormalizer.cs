@@ -22,7 +22,7 @@ namespace PolishSpeechLibrary.Gtp
                     continue;
                 }
 
-                normalized.Add(new Label(label));
+                normalized.Add(new Segment(label));
             }
 
             // remove last pause

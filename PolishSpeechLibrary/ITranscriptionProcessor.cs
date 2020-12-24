@@ -2,7 +2,7 @@
 
 namespace PolishSpeechLibrary
 {
-    internal interface ITranscriptionProcessor
+    public interface ITranscriptionProcessor
     {
         Transcription Process(Transcription source);
     }

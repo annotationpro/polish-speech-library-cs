@@ -18,10 +18,9 @@
 
         private void Copy(Letter source, Letter target)
         {
-            target.Id = source.Id;
             target.Value = source.Value;
             target.ArticulationManner = source.ArticulationManner;
-            target.ArticulationPlace =source.ArticulationPlace;
+            target.ArticulationPlace = source.ArticulationPlace;
             target.IsVoice = source.IsVoice;
             target.IsPause = source.IsPause;
         }
@@ -31,15 +30,8 @@
             Value = value.ToString();
         }
 
-        public Letter(int id, string value)
+        public Letter(string value, ArticulationManner articulationManner, ArticulationPlace articulationPlace, bool isVoice, bool isPause)
         {
-            Id = id;
-            Value = value;
-        }
-
-        public Letter(int id, string value, ArticulationManner articulationManner, ArticulationPlace articulationPlace, bool isVoice, bool isPause)
-        {
-            Id = id;
             Value = value;
             ArticulationManner = articulationManner;
             ArticulationPlace = articulationPlace;
@@ -47,7 +39,6 @@
             IsPause = isPause;
         }
 
-        public int Id { get; set; }
         public string Value { get; set; }
         public ArticulationManner ArticulationManner { get; set; }
         public ArticulationPlace ArticulationPlace { get; set; }

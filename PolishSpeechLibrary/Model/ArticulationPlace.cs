@@ -32,6 +32,7 @@ namespace PolishSpeechLibrary.Model
         {
             return new List<ArticulationPlace>()
             {
+                new ArticulationPlace(0, "undefined"),
                 new ArticulationPlace(1, "sil"),
                 new ArticulationPlace(2, "backvowel"),
                 new ArticulationPlace(3, "frontvowel"),

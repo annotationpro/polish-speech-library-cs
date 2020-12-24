@@ -4,6 +4,7 @@
     {
         Orthographic,
         SAMPA,
+        ClarinSampa,
         IPA,
         Unknown
     }

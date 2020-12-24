@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PolishSpeechLibrary.Gtp;
-using PolishSpeechLibrary.Import;
+using PolishSpeechLibrary.IO;
 
 namespace PolishSpeechLibrary.Tests
 {
@@ -11,7 +11,7 @@ namespace PolishSpeechLibrary.Tests
         public void ProcessOrthographicTest()
         {
             // input
-            var orthographic = new TextImporter().Import(" a bb  c d  ");
+            var orthographic = new OrthorgraphicTranscriptionReader().Read(" a bb  c d  ");
 
             // operation
             var normalized = new GtpNormalizer().Process(orthographic);

@@ -1,26 +1,38 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Katarzyna Klessa</Authors>
+    <Product>Polish Speech Library</Product>
+    <Description>Polish language programming support library.</Description>
+    <Copyright>Katarzyna Klessa</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Company>Annotation PRO</Company>
+    <PackageProjectUrl>https://github.com/annotationpro/polish-speech-library-cs</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/annotationpro/polish-speech-library-cs</RepositoryUrl>
+    <PackageTags>polish, speech, technology</PackageTags>
+    <Version>1.0.6</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Accent\**" />
     <Compile Remove="Model\Processor\**" />
-    <Compile Remove="Syllable\**" />
     <Compile Remove="Word\**" />
     <EmbeddedResource Remove="Accent\**" />
     <EmbeddedResource Remove="Model\Processor\**" />
-    <EmbeddedResource Remove="Syllable\**" />
     <EmbeddedResource Remove="Word\**" />
     <None Remove="Accent\**" />
     <None Remove="Model\Processor\**" />
-    <None Remove="Syllable\**" />
     <None Remove="Word\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="cd $(TargetDir)&#xD;&#xA;cd ..&#xD;&#xA;del *.nupkg" />
+  </Target>
 
 </Project>
