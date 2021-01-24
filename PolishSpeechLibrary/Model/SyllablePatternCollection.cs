@@ -10,6 +10,7 @@ namespace PolishSpeechLibrary.Model
             {
                 return new SyllablePatternCollection()
                 {
+                    new SyllablePattern("Vn'|skjV", "VC|CCCV", false),                    
                     new SyllablePattern("V|gjV", "V|CCV", false),
                     new SyllablePattern("V|kjV", "V|CCV", false),
                     new SyllablePattern("V|t^s'jV", "V|CCV", false),

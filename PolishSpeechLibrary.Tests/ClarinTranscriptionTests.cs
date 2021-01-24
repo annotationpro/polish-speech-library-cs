@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PolishSpeechLibrary.CLARIN;
 using PolishSpeechLibrary.Model;
+using System.Collections.Generic;
 
 namespace PolishSpeechLibrary.Tests
 {
@@ -8,6 +9,7 @@ namespace PolishSpeechLibrary.Tests
     public class ClarinTranscriptionTests
     {
         public string Csv { get; private set; }
+        public string BadCsv { get; private set; }
 
         [TestInitialize]
         public void Before()
@@ -59,32 +61,54 @@ namespace PolishSpeechLibrary.Tests
                     "7.030\t0.030\tv\tI\n" +
                     "7.060\t0.030\ti\tE\n" +
                     "";
+
+            BadCsv = "0.000\t0.030\ts'\tB\n" +
+                    "0.030\t0.030\tf\tI\n" +
+                    "0.060\t0.030\tj\tI\n" +
+                    "0.090\t0.030\to\tI\n" +
+                    "0.120\t0.030\tn\tI\n" +
+                    "0.150\t0.030\tx!\tI\n" +
+                    "0.180\t0.030\te\tI\n" +
+                    "";
         }
 
         [TestMethod]
         public void ReadClaringCsvTest()
         {
-            var transcription = ReadCsv();
+            var transcription = ReadCsv(Csv);
 
             Assert.AreEqual(46, transcription.Count);
         }
 
-        private Transcription ReadCsv()
+        private Transcription ReadCsv(string csv)
         {
             var reader = new ClarinCsvReader();
-            string[] lines = Csv.Split('\n');
+            string[] lines = csv.Split('\n');
             return reader.Read(lines);
+        }
+
+        [TestMethod]
+        public void BadLetterTest()
+        {
+            try
+            {
+                var transcription = ReadCsv(BadCsv);
+            }
+            catch (KeyNotFoundException exc)
+            {
+                Assert.AreEqual("There is no letter: x! in alphabet", exc.Message);
+            }
         }
 
         [TestMethod]
         public void ConvertClarinToSampaTest()
         {
-            var clarin = ReadCsv();
+            var clarin = ReadCsv(Csv);
             var converter = new ClarinToSampaConverter();
             var sampa = converter.Process(clarin);
 
             Assert.AreEqual(46, clarin.Count);
-            Assert.AreEqual(46, sampa.Count);            
+            Assert.AreEqual(46, sampa.Count);
         }
     }
 }

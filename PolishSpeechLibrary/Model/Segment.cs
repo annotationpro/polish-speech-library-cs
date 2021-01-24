@@ -30,6 +30,7 @@
             target.IsPrimaryPhraseAccent = source.IsPrimaryPhraseAccent;
             target.IsSecondaryPhraseAccent = source.IsSecondaryPhraseAccent;
             target.IsNotFound = source.IsNotFound;
+            target.IsSingleton = source.IsSingleton;
         }
 
         public Segment(double start, Letter letter)
@@ -59,6 +60,7 @@
         public bool IsPrimaryPhraseAccent { get; set; }
         public bool IsSecondaryPhraseAccent { get; set; }
         public bool IsNotFound { get; set; }
+        public bool IsSingleton { get; set; }
 
         public override string ToString()
         {

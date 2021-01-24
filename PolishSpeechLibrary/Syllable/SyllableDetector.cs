@@ -1,5 +1,6 @@
 ﻿using PolishSpeechLibrary.Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 
 namespace PolishSpeechLibrary.Syllable
@@ -158,6 +159,8 @@ namespace PolishSpeechLibrary.Syllable
                               patternDictionary[sPat] = this.Patterns.Add( p ).ToString();
                             }
                             */
+
+                            throw new KeyNotFoundException("Missing syllable pattern: " + sUtterance);
                         }
 
                         // Obliczenie położenia podziału

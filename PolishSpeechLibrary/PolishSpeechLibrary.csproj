@@ -12,7 +12,7 @@
     <PackageProjectUrl>https://github.com/annotationpro/polish-speech-library-cs</PackageProjectUrl>
     <RepositoryUrl>https://github.com/annotationpro/polish-speech-library-cs</RepositoryUrl>
     <PackageTags>polish, speech, technology</PackageTags>
-    <Version>1.0.6</Version>
+    <Version>1.0.11</Version>
   </PropertyGroup>
 
   <ItemGroup>

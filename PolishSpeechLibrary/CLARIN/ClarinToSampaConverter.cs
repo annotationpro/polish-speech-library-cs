@@ -35,6 +35,7 @@ namespace PolishSpeechLibrary.CLARIN
             LetterConvert.Add("j", "j");
             LetterConvert.Add("J", "J");
             LetterConvert.Add("k", "k");
+            LetterConvert.Add("k'", "c");
             LetterConvert.Add("l", "l");
             LetterConvert.Add("m", "m");
             LetterConvert.Add("n", "n");
@@ -56,6 +57,7 @@ namespace PolishSpeechLibrary.CLARIN
             LetterConvert.Add("v", "v");
             LetterConvert.Add("w", "w");
             LetterConvert.Add("x", "x");
+            LetterConvert.Add("x'", "x");
             LetterConvert.Add("I", "y");
             LetterConvert.Add("z", "z");
             LetterConvert.Add("z'", "z'");

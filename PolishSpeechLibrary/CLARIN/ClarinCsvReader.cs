@@ -1,5 +1,6 @@
 ﻿using PolishSpeechLibrary.Model;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
@@ -7,6 +8,8 @@ namespace PolishSpeechLibrary.CLARIN
 {
     public class ClarinCsvReader
     {
+        IList<string> prosodicWordSingletons = new List<string>() { "f", "s", "v", "z" };
+
         public ClarinCsvReader()
         {
             InitializeCultureInfo();
@@ -33,13 +36,25 @@ namespace PolishSpeechLibrary.CLARIN
         {
             Transcription transcription = Transcription.CreateClarinSampaTranscription();
 
+
+            Segment prevSegment = null;
+
             foreach (var line in lines)
             {
                 var segment = ReadClarinCsvLine(line, transcription.Alphabet);
 
                 if (segment != null)
                 {
+                    if(prevSegment != null)
+                    {
+                        // w domu, z domu, z klasy, w szkole prosodic only on first word
+                        if(prevSegment.IsSingleton && prosodicWordSingletons.Contains(prevSegment.Label))
+                        {
+                            segment.IsProsodicWordInitial = false;
+                        }
+                    }
                     transcription.Add(segment);
+                    prevSegment = segment;
                 }
             }
 
@@ -52,15 +67,24 @@ namespace PolishSpeechLibrary.CLARIN
 
             if (fields.Length < 3) return null;
 
-            var isWordInitial = fields.Length > 3 && fields[3] == "B";
+            var isWordInitial = fields.Length > 3 && fields[3] == "B" || fields[3] == "S";
+            var isSingleton = fields.Length > 3 && fields[3] == "S";
+
+            var letter = alphabet.LetterByLabel(fields[2]);
+
+            if(letter == null)
+            {
+                throw new KeyNotFoundException("There is no letter: " + fields[2] + " in alphabet");
+            }
 
             return new Segment()
             {
                 Start = double.Parse(fields[0]),
                 Duration = double.Parse(fields[1]),
-                Letter = alphabet.LetterByLabel(fields[2]),
+                Letter = letter,
                 IsWordInitial = isWordInitial,
-                IsProsodicWordInitial = isWordInitial
+                IsProsodicWordInitial = isWordInitial,
+                IsSingleton = isSingleton
             };
         }
     }
