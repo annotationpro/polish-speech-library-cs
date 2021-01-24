@@ -23,7 +23,8 @@ namespace PolishSpeechLibrary.Tests
                 IsSecondaryWordAccent = true,
                 IsPrimaryPhraseAccent = true,
                 IsSecondaryPhraseAccent = true,
-                IsNotFound = true
+                IsNotFound = true,
+                IsSingleton = true
             };
 
 
@@ -35,7 +36,7 @@ namespace PolishSpeechLibrary.Tests
             // IMPORTANT! remember to update copy method
             var properties = typeof(Segment).GetProperties().Where(p => p.CanWrite).ToList();
             int writablePropertiesCount = properties.Count();
-            Assert.AreEqual(12, writablePropertiesCount);
+            Assert.AreEqual(13, writablePropertiesCount);
 
             // copy result
             Assert.AreEqual(1, label.Start);
@@ -56,6 +57,7 @@ namespace PolishSpeechLibrary.Tests
             Assert.AreEqual(true, label.IsPrimaryPhraseAccent);
             Assert.AreEqual(true, label.IsSecondaryPhraseAccent);
             Assert.AreEqual(true, label.IsNotFound);
+            Assert.AreEqual(true, label.IsSingleton);
         }
     }
 }
