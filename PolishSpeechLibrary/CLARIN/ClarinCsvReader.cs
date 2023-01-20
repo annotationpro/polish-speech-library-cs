@@ -67,7 +67,7 @@ namespace PolishSpeechLibrary.CLARIN
 
             if (fields.Length < 3) return null;
 
-            var isWordInitial = fields.Length > 3 && fields[3] == "B" || fields[3] == "S";
+            var isWordInitial = fields.Length > 3 && (fields[3] == "B" || fields[3] == "S");
             var isSingleton = fields.Length > 3 && fields[3] == "S";
 
             var letter = alphabet.LetterByLabel(fields[2]);

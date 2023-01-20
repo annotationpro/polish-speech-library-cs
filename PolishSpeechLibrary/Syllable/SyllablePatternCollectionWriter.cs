@@ -8,7 +8,11 @@ namespace PolishSpeechLibrary.IO
     {
         public string WriteJson(SyllablePatternCollection syllables)
         {
+#if DEBUG
             return JsonConvert.SerializeObject(syllables, Formatting.Indented);
+#else
+            return JsonConvert.SerializeObject(syllables, Formatting.None);
+#endif
         }
 
         public void WriteJsonFile(SyllablePatternCollection syllables, string jsonFilePath)
