@@ -74,7 +74,10 @@ namespace PolishSpeechLibrary.Model
                 {
                     sb.Append(" ");
                 }
-                sb.Append($"{label.Letter.Value}");
+                var wordInitial = label.IsProsodicWordInitial ? "#" : "";
+                //var wordInitial = label.IsWordInitial ? "#" : "";
+                var syllableInitial = label.IsSyllableInitial ? "." : "";
+                sb.Append($"{wordInitial}{syllableInitial}{label.Letter.Value}");
             }
             return sb.ToString();
         }
